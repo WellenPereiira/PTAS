@@ -20,6 +20,14 @@ app.get("/usuarios/:id", async function(req, res) {
   res.json(resultado);
 });
 
+// NOVA ROTA QUE MOSTRA A EMPRESA DO USUÁRIO
+app.get("/usuarios/:id/empresa", async function(req, res){
+  let resultado = await usuario.findByPk(req.params.id, { 
+      include: 'empresa' 
+  });
+  res.json(resultado.empresa);
+});
+
 app.post("/usuarios", async function(req, res) {
   var resultado = await usuario.create(req.body);
   res.json(resultado);
@@ -45,6 +53,14 @@ app.get("/empresas", async function(req, res) {
 app.get("/empresas/:id", async function(req, res) {
   var resultado = await empresa.findOne({where:{ id:req.params.id }});
   res.json(resultado);
+});
+
+// NOVA ROTA QUE MOSTRA TODOS OS USUÁRIOS QUE TRABALHAM DA EMPRESA
+app.get("/empresas/:id/usuarios", async function(req, res){
+  let resultado = await empresa.findByPk(req.params.id, { 
+      include: 'usuarios' 
+  });
+  res.json(resultado.usuarios);
 });
 
 app.post("/empresas", async function(req, res) {

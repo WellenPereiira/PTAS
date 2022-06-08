@@ -23,3 +23,4 @@ module.exports = (sequelize, DataTypes) => {
 };
 
 //usuario pertence a empresa por isso tem uma refencia para a empresa
+// e o as é escrito no singular por o usuário pertencer a uma unica empresa
